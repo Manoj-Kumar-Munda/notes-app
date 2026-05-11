@@ -10,22 +10,27 @@ const Container = ({ children }: { children: React.ReactNode }) => {
 
   const containerStyle = StyleSheet.flatten([
     styles.container,
-    { backgroundColor: colors.background, paddingTop: insets.top },
+    {
+      backgroundColor: colors.background,
+      paddingTop: insets.top,
+      paddingBottom: insets.bottom,
+    },
   ]);
 
   return (
     <>
       <StatusBar style={isDark ? "light" : "dark"} />
-      <View style={containerStyle}>{children}</View>;
+      <View style={containerStyle}>{children}</View>
     </>
   );
 };
 
 export default Container;
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: spacing.spacing_16,
+    paddingBottom: spacing.spacing_16,
   },
-};
+});

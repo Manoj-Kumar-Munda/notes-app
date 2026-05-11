@@ -3,20 +3,26 @@ const colors = {
   DARK: "#171717",
   WHITE: "#ffffff",
   GRAY: "#6b7280",
+  LIGHT_GRAY: "#DFE3EA",
+  DARK_GRAY: "#2B3240",
+  ICON_DARK: "#090A0F",
+  ICON_LIGHT: "#F8FAFC",
 };
 
 const palette = {
   light: {
     background: colors.GHOST_WHITE,
-    icon: colors.DARK,
+    icon: colors.ICON_DARK,
     text: colors.DARK,
     muted: colors.GRAY,
+    border: colors.LIGHT_GRAY,
   },
   dark: {
     background: colors.DARK,
-    icon: colors.WHITE,
+    icon: colors.ICON_LIGHT,
     text: colors.WHITE,
     muted: colors.GRAY,
+    border: colors.DARK_GRAY,
   },
 };
 
@@ -36,15 +42,15 @@ const font = {
 } as const;
 
 const spacing = {
-  default: 4,
-  "!6": 16,
+  spacing_4: 4,
+  spacing_8: 8,
+  spacing_2: 12,
+  spacing_16: 16,
+  spacing_32: 32,
 };
 
-const theme = {
-  palette,
-  font,
-  spacing,
-} as const;
+const rounded = {
+  default: 8,
+};
 
-export { font, palette, spacing };
-export default theme;
+export { font, palette, spacing, rounded };

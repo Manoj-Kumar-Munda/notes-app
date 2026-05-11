@@ -2,11 +2,10 @@ import Container from "@/components/container";
 import ThemeToggleButton from "@/components/theme-toggle-button";
 import { font } from "@/constants/theme";
 import { useTheme } from "@/context/theme-context";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
-  const { isDark, colors } = useTheme();
+  const { colors } = useTheme();
 
   const headingStyle = StyleSheet.flatten([
     styles.heading,
@@ -27,8 +26,6 @@ export default function Index() {
         </View>
         <ThemeToggleButton />
       </View>
-
-      <StatusBar style={isDark ? "light" : "dark"} />
     </Container>
   );
 }

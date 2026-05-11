@@ -1,9 +1,11 @@
+import { spacing } from "@/constants/theme";
 import { useTheme } from "@/context/theme-context";
+import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Container = ({ children }: { children: React.ReactNode }) => {
-  const { colors } = useTheme();
+  const { colors, isDark } = useTheme();
   const insets = useSafeAreaInsets();
 
   const containerStyle = StyleSheet.flatten([
@@ -11,7 +13,12 @@ const Container = ({ children }: { children: React.ReactNode }) => {
     { backgroundColor: colors.background, paddingTop: insets.top },
   ]);
 
-  return <View style={containerStyle}>{children}</View>;
+  return (
+    <>
+      <StatusBar style={isDark ? "light" : "dark"} />
+      <View style={containerStyle}>{children}</View>;
+    </>
+  );
 };
 
 export default Container;
@@ -19,6 +26,6 @@ export default Container;
 const styles = {
   container: {
     flex: 1,
-    paddingHorizontal: 16,
+    paddingHorizontal: spacing.spacing_16,
   },
 };

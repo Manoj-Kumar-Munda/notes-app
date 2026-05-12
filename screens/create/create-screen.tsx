@@ -14,6 +14,7 @@ import { useTheme } from "@/context/theme-context";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { font, spacing, rounded } from "@/constants/theme";
 import Feather from "@expo/vector-icons/Feather";
+import { useResponsive } from "@/hooks/useResponsive";
 
 const CreateNotesSceen = () => {
   const { colors } = useTheme();
@@ -22,6 +23,8 @@ const CreateNotesSceen = () => {
   const [content, setContent] = useState("");
   const [titleFocused, setTitleFocused] = useState(false);
   const [contentFocused, setContentFocused] = useState(false);
+
+  const { isTablet, isLandscape } = useResponsive();
 
   const iconStyles = StyleSheet.flatten([
     styles.icon,
@@ -51,6 +54,16 @@ const CreateNotesSceen = () => {
     styles.heading,
     {
       color: colors.text,
+    },
+  ]);
+
+  const formStyles = StyleSheet.flatten([
+    styles.form,
+    {
+      paddingHorizontal:
+        isTablet || isLandscape
+          ? insets.left + insets.right + spacing.spacing_32
+          : spacing.spacing_16,
     },
   ]);
 
@@ -85,7 +98,7 @@ const CreateNotesSceen = () => {
           </View>
         </ImageBackground>
 
-        <View style={styles.form}>
+        <View style={formStyles}>
           <View style={styles.fields}>
             <View style={styles.fieldGroup}>
               <View style={styles.labelRow}>
@@ -164,7 +177,6 @@ const styles = StyleSheet.create({
   },
   form: {
     marginTop: spacing.spacing_20,
-    padding: spacing.spacing_16,
     flex: 1,
     justifyContent: "space-between",
   },

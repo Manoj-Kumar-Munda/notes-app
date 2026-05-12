@@ -1,5 +1,6 @@
 import { spacing } from "@/constants/theme";
 import { useTheme } from "@/context/theme-context";
+import { useResponsive } from "@/hooks/useResponsive";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -7,6 +8,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 const Container = ({ children }: { children: React.ReactNode }) => {
   const { colors, isDark } = useTheme();
   const insets = useSafeAreaInsets();
+  const { isLandscape, isTablet } = useResponsive();
 
   const containerStyle = StyleSheet.flatten([
     styles.container,
@@ -14,6 +16,10 @@ const Container = ({ children }: { children: React.ReactNode }) => {
       backgroundColor: colors.background,
       paddingTop: insets.top,
       paddingBottom: insets.bottom,
+      paddingHorizontal:
+        isTablet || isLandscape
+          ? insets.left + insets.right + spacing.spacing_32
+          : spacing.spacing_16,
     },
   ]);
 

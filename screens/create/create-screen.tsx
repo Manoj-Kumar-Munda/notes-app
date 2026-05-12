@@ -86,45 +86,48 @@ const CreateNotesSceen = () => {
         </ImageBackground>
 
         <View style={styles.form}>
-          <View style={styles.fieldGroup}>
-            <View style={styles.labelRow}>
-              <View style={iconStyles}>
-                <Feather name="type" size={14} color={colors.primary} />
+          <View style={styles.fields}>
+            <View style={styles.fieldGroup}>
+              <View style={styles.labelRow}>
+                <View style={iconStyles}>
+                  <Feather name="type" size={14} color={colors.primary} />
+                </View>
+                <Text style={[styles.label, { color: colors.text }]}>
+                  Title
+                </Text>
               </View>
-              <Text style={[styles.label, { color: colors.text }]}>Title</Text>
+              <TextInput
+                style={inputStyles(titleFocused)}
+                placeholder="Give your note a title"
+                placeholderTextColor={colors.muted}
+                value={title}
+                onChangeText={setTitle}
+                onFocus={() => setTitleFocused(true)}
+                onBlur={() => setTitleFocused(false)}
+                maxLength={100}
+              />
             </View>
-            <TextInput
-              style={inputStyles(titleFocused)}
-              placeholder="Give your note a title"
-              placeholderTextColor={colors.muted}
-              value={title}
-              onChangeText={setTitle}
-              onFocus={() => setTitleFocused(true)}
-              onBlur={() => setTitleFocused(false)}
-              maxLength={100}
-            />
-            X
-          </View>
 
-          <View style={[styles.fieldGroup, { flex: 1 }]}>
-            <View style={styles.labelRow}>
-              <View style={iconStyles}>
-                <Feather name="file-text" size={14} color={colors.primary} />
+            <View style={styles.fieldGroup}>
+              <View style={styles.labelRow}>
+                <View style={iconStyles}>
+                  <Feather name="file-text" size={14} color={colors.primary} />
+                </View>
+                <Text style={[styles.label, { color: colors.text }]}>
+                  Content
+                </Text>
               </View>
-              <Text style={[styles.label, { color: colors.text }]}>
-                Content
-              </Text>
+              <TextInput
+                style={[styles.textArea, inputStyles(contentFocused)]}
+                placeholder="Type your notes here..."
+                placeholderTextColor={colors.muted}
+                value={content}
+                onChangeText={setContent}
+                onFocus={() => setContentFocused(true)}
+                onBlur={() => setContentFocused(false)}
+                multiline
+              />
             </View>
-            <TextInput
-              style={[styles.textArea, inputStyles(contentFocused)]}
-              placeholder="Type your notes here..."
-              placeholderTextColor={colors.muted}
-              value={content}
-              onChangeText={setContent}
-              onFocus={() => setContentFocused(true)}
-              onBlur={() => setContentFocused(false)}
-              multiline
-            />
           </View>
 
           <Pressable
@@ -162,8 +165,11 @@ const styles = StyleSheet.create({
   form: {
     marginTop: spacing.spacing_20,
     padding: spacing.spacing_16,
-    gap: spacing.spacing_20,
     flex: 1,
+    justifyContent: "space-between",
+  },
+  fields: {
+    gap: spacing.spacing_20,
   },
   fieldGroup: {
     gap: spacing.spacing_8,

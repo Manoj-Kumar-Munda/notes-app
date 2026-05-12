@@ -20,7 +20,7 @@ export default function Home() {
 
   const subheadingStyle = StyleSheet.flatten([
     styles.subheading,
-    { color: colors.muted },
+    { color: colors.primary },
   ]);
 
   return (

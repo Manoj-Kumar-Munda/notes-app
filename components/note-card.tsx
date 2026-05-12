@@ -3,46 +3,51 @@ import { type NoteType } from "@/constants/data";
 import { useTheme } from "@/context/theme-context";
 import Feather from "@expo/vector-icons/Feather";
 import { StyleSheet, Text, View } from "react-native";
+import { formatDate } from "@/utils/formateDate";
 
 type NoteCardProps = NoteType;
-
-const formatDate = (date: string) =>
-  new Intl.DateTimeFormat("en", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  }).format(new Date(date));
 
 const NoteCard: React.FC<NoteCardProps> = ({ title, content, createdAt }) => {
   const { colors } = useTheme();
 
+  const cardStyles = StyleSheet.flatten([
+    styles.card,
+    {
+      backgroundColor: colors.background,
+      borderColor: colors.primary,
+    },
+  ]);
+
+  const contentStyles = StyleSheet.flatten([
+    styles.content,
+    {
+      color: colors.muted,
+    },
+  ]);
+
+  const dateStyles = StyleSheet.flatten([
+    styles.metaText,
+    {
+      color: colors.muted,
+    },
+  ]);
+
+  const date = formatDate(createdAt);
+
   return (
-    <View
-      style={[
-        styles.card,
-        { backgroundColor: colors.background, borderColor: colors.border },
-      ]}
-    >
+    <View style={cardStyles}>
       <View style={styles.headingRow}>
         <View style={styles.textGroup}>
           <Text style={[styles.title, { color: colors.text }]}>{title}</Text>
-          <Text
-            numberOfLines={2}
-            ellipsizeMode="tail"
-            style={[styles.content, { color: colors.muted }]}
-          >
+          <Text numberOfLines={2} ellipsizeMode="tail" style={contentStyles}>
             {content}
           </Text>
         </View>
-
-        <Feather name="chevron-down" size={18} color={colors.icon} />
       </View>
 
       <View style={styles.metaRow}>
-        <Feather name="calendar" size={14} color={colors.muted} />
-        <Text style={[styles.metaText, { color: colors.muted }]}>
-          {formatDate(createdAt)}
-        </Text>
+        <Feather name="calendar" size={14} color={colors.primary} />
+        <Text style={dateStyles}>{date}</Text>
       </View>
     </View>
   );
